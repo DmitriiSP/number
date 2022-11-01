@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    
+    <title>Угадай число</title>
+    
+    <style>
+        #enter, #btn2, #btn3, #cntr, #predvvod, #less, #more, #victory {
+            display: none;
+        }
+        div{
+            background-color: #FFD700;
+            width: 800px;
+            height: 600px;
+            border: 10px solid #E0FFFF;                                  
+            margin: auto;
+        }
+        h1{
+            text-align: center;
+            font-size: 40px;
+        }
+        #prig {
+            font-weight: bold;
+            font-size: 30px;
+            margin-top: 100px;
+            text-align: center;
+        }
+        #btn1, #btn3 {
+            font-variant: small-caps;
+            width: 200px;
+            font-size: 30px;
+            background-color: #00FFFF;             
+            margin-left: 300px;
+            margin-top: 60px;
+        }
+        #btn2 {
+            font-variant: small-caps;
+            width: 100px;
+            font-size: 30px;
+            background-color: #FF00FF;               
+            margin-left: 350px;
+            margin-top: 50px;
+        }
+        #predvvod {
+            width: 100%;
+            font-weight: bold;
+            font-size: 30px;
+            margin-top: 70px;
+            text-align: center;
+        }
+        #enter {
+            width: 200px;
+            font-size: 25px;
+            margin-left: 300px;
+            margin-top: 50px;
+            line-height: 30px;            
+        }
+        #cntr {
+            width: 100%;
+            text-align: center;
+            margin-top: 60px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        #less, #more {
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 25px;
+            color: #FF1493;
+            
+        }
+    </style>
+</head>
+   <body>
+    <div>
+    <h1>Игра "Угадай число"</h1>
+    <p id="predvvod">Введите число от 1 до 100</p>
+    <p id="prig">Для начала игры нажмите кнопку</p>
+    
+    <p id="victory">Вы угадали</p>
+    <input type="text" id="enter">
+    <p id="less">Мало, надо больше, подумай ещё!</p>
+    <p id="more">Много, надо меньше, подумай ещё!</p>
+    <button type="button" id="btn1">Поехали</button>
+    <button type="button" id="btn2">OK</button>
+    
+    <button type="button" id="btn3">начало игры</button>
+    
+    <p id="cntr"></p>
+    </div>
+        <script>
+        let counter = 0;
+        let summ;
+        let num;
+        document.getElementById('btn1').onclick = function(){
+            summ = Math.floor(Math.random() * 100 +1);
+            document.getElementById('btn1').style.display = "none";
+            document.getElementById('btn2').style.display = "inline-block";
+            document.getElementById('enter').style.display = "inline-block";
+            document.getElementById('predvvod').style.display = "inline-block";
+            document.getElementById('prig').style.display = "none";
+            document.getElementById('cntr').style.display = "block";
+            counter = 0;
+            document.getElementById('cntr').innerHTML = "Количество попыток: " + counter;
+        }
+        
+        document.getElementById('btn2').onclick = function () {
+            let num = document.getElementById('enter').value;
+            num = +num;
+            counter++;
+            if (isNaN(num)){
+                alert ('Необходимо ввести число');
+            }
+            if (num == summ) {
+                
+                document.getElementById('enter').value = "";
+                document.getElementById('btn1').style.display = "inline-block";
+                document.getElementById('btn2').style.display = "none";
+                document.getElementById('enter').style.display = "none";
+                document.getElementById('less').style.display = "none";
+                document.getElementById('more').style.display = "none";
+                document.getElementById('predvvod').style.display = "none";
+                document.getElementById('cntr').style.display = "inline-block";
+                document.getElementById('cntr').innerHTML = "Вы угадали число с " + counter + " попыток. Сыграем еще раз?";
+                
+                
+            } else if (num > summ){
+                document.getElementById('more').style.display = "inline-block";
+                document.getElementById('less').style.display = "none";
+                document.getElementById('cntr').innerHTML = "Количество попыток: " + counter;
+                
+            } else {
+                document.getElementById('more').style.display = "none";
+                document.getElementById('less').style.display = "inline-block";
+                document.getElementById('cntr').innerHTML = "Количество попыток: " + counter;
+            }
+            
+        }
+        
+        
+        </script>
+    </body>
+</html>
